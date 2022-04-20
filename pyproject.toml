@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "grind-75"
+version = "0.1.0"
+description = ""
+authors = ["kyo <odinxp@gmail.com>"]
+readme = "README.md"
+packages = [{include = "grind_75"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+flake8 = "^4.0.1"
+black = "^22.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
