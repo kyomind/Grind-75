@@ -3,6 +3,7 @@
 ## References
 - [Grind 75 - A modern Blind 75 you can customize, by the author of Blind 75](https://www.techinterviewhandbook.org/grind75)
 - [NeetCode 150](https://neetcode.io/practice)
+- [LeetCode Dump](https://github.com/JacobLinCool/LeetCode-Dump)
 
 ## Dashboard
 
