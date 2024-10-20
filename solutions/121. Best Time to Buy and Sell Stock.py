@@ -51,9 +51,11 @@ class Solution(object):
                 min_price = p
                 continue
 
-            """以下兩件事是二選一的(但可都不成立，所以不用if/else)，
-            所以用 if/elif，因為如果 min_price 更新為 p，那此時 p - min_price 就會是 0
-            此時 max_profit 就不會更新，因為它至少要大於 0 才會更新"""
+            """以下兩件事情不會同時發生：(所以用 if/else 或 if/elif 都可以，只是後者更直觀)
+            - 如果當前價格是新的最小價格，則更新 min_price。
+            - 如果當前價格減去最小價格的利潤比目前的最大利潤還大，則更新 max_profit。
+            注意：當 min_price 被更新時，當前 p 無法帶來利潤，因此 max_profit 不會更新。"""
+
             # 如果當前價格比最小價格還小，就更新最小價格
             if p < min_price:
                 min_price = p
