@@ -1,5 +1,5 @@
 # Kyo's LeetCode Grinding
-我的 LeetCode 刷题紀錄，具體做法與詳情，請見〈與 AI 共舞：我的 LeetCode 刷题之道〉一文。
+我的 LeetCode 刷题紀錄，具體做法請見〈與 AI 共舞：我的 LeetCode 刷题之道〉一文。
 
 ## Dashboard
 
