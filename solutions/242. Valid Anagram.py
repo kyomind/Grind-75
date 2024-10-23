@@ -46,7 +46,7 @@ class Solution2(object):
 
 
 # 再低階一點，使用 list 來存放每個字母出現的次數
-class Solution(object):
+class Solution3(object):
     def isAnagram(self, s, t):
         """
         :type s: str
@@ -63,11 +63,14 @@ class Solution(object):
             # 必須減去ord('a')，才能將字母映射到0-25的範圍
             # 讓兩者相互抵銷，每一個字母出現一次，就加一次，出現一次就減一次
             # 結果必須是全為0
-            count_list[ord(s[i]) - ord('a')] += 1
-            count_list[ord(t[i]) - ord('a')] -= 1
+            count_list[ord(s[i]) - ord("a")] += 1
+            count_list[ord(t[i]) - ord("a")] -= 1
 
         for count in count_list:
             if count != 0:
                 return False
 
         return True
+
+
+# 排序法
