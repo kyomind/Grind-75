@@ -22,7 +22,7 @@ class Solution1(object):
 
 # 低階一點，使用python的字典 (dict) 來存放每個字母出現的次數
 # 不准用字串的 count 方法
-class Solution(object):
+class Solution2(object):
     def isAnagram(self, s, t):
         """
         :type s: str
@@ -43,3 +43,31 @@ class Solution(object):
             t_dict[t[i]] = t_dict.get(t[i], 0) + 1
 
         return s_dict == t_dict
+
+
+# 再低階一點，使用 list 來存放每個字母出現的次數
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        if len(s) != len(t):
+            return False
+
+        # 這裡用 list 存放每個字母出現的次數
+        count_list = [0] * 26
+
+        for i in range(len(s)):
+            # 必須減去ord('a')，才能將字母映射到0-25的範圍
+            # 讓兩者相互抵銷，每一個字母出現一次，就加一次，出現一次就減一次
+            # 結果必須是全為0
+            count_list[ord(s[i]) - ord('a')] += 1
+            count_list[ord(t[i]) - ord('a')] -= 1
+
+        for count in count_list:
+            if count != 0:
+                return False
+
+        return True
