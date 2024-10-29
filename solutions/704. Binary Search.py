@@ -12,6 +12,7 @@ class Solution(object):
         right = len(nums) - 1
 
         # 最多執行 len(nums) 次，但這裡不可能達到最大次數
+        # 也可以用 while left <= right: 來寫
         for _ in nums:
             # index 只能是整數，所以要用 // 來取整數
             # mid 是下一次的調整範圍邊界 index，取中間值
