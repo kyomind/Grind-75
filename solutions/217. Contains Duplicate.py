@@ -26,10 +26,29 @@ class Solution1(object):
 # 犯規做法，使用Python set
 # 僅供參考，不建議這樣寫
 # beat 99%
-class Solution(object):
+class Solution2(object):
     def containsDuplicate(self, nums):
         """
         :type nums: List[int]
         :rtype: bool
         """
         return len(nums) != len(set(nums))
+
+
+# 其實有兩種的融合，直接使用set來實作原來的hash table
+# 這樣就不用考慮值的問題，更加簡潔
+# 因為用了迴圈，所以還是沒有直接使用set快(beat 72%)
+class Solution(object):
+    def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        counter = set()
+        for i in nums:
+            if i in counter:
+                return True
+
+            counter.add(i)
+
+        return False
