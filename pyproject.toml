@@ -1,0 +1,17 @@
+[project]
+requires-python = ">=3.10"
+
+[tool.ruff] # https://docs.astral.sh/ruff/settings/#top-level
+line-length = 100
+
+[tool.ruff.lint] # https://docs.astral.sh/ruff/settings/#lint
+ignore = [
+  "E402", # module level import not at top of file
+]
+select = [
+  "E", # pycodestyle errors
+  "W", # pycodestyle warnings
+  "F", # pyflakes
+  "I", # isort
+  "UP", # pyupgrade
+]
