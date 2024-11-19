@@ -7,6 +7,11 @@ class Solution:
         # 雙閉區間 [left, right]，所以條件是 left <= right
         # XXX 雙閉區間，所以 mid 的移動是 +1 和 -1
         while left <= right:  # 搜尋範圍是 [left, right]，因此終止條件是 left > right
+            """使用 while left <= right 作為迴圈條件
+            表示只要搜尋範圍 [left, right] 還有可能包含目標值，就繼續進行
+            雙閉區間，兩者有重疊的可能，當 left == right 時，仍然需要進行一次迭代
+            這樣可以保證退出迴圈時，left 和 right 會停在一個位置，並且 left > right
+            """
             mid = left + (right - left) // 2  # 計算中間索引，同時避免溢位
             # 相當於 mid = (left + right) // 2
 
