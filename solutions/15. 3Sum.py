@@ -5,7 +5,7 @@
 # 所以我們需要在遍歷過程中去除重複的情況
 # 解法 by ChatGPT
 # XXX 本題無法使用 enumerate，因為需要同時使用 i, left, right 三個指針
-class Solution(object):
+class Solution:
     def threeSum(self, nums):
         """
         :type nums: List[int]
