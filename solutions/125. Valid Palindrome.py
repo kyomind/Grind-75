@@ -1,5 +1,5 @@
-# 暴力法
-class Solution1(object):
+# 暴力法，而且用了太多 Python 高階處理
+class Solution1:
     def isPalindrome(self, s):
         """
         :type s: str
@@ -14,7 +14,7 @@ class Solution1(object):
 
 
 # 雙指針法 - 標準解法
-class Solution2(object):
+class Solution2:
     def isPalindrome(self, s):
         """
         :type s: str
@@ -57,6 +57,7 @@ def isPalindrome(s: str) -> bool:
             right -= 1
 
         # 比較兩邊的字串（忽略大小寫）
+        # 2024-11-29 這裡竟然用了「衛語句」！ 下面是沒用的版本
         if s[left].lower() != s[right].lower():
             return False
 
@@ -66,3 +67,29 @@ def isPalindrome(s: str) -> bool:
 
     # 若成功遍歷所有字串，則是回文
     return True
+
+
+# 2024-11-29
+# 我第一次重看之前解法的感受是：為什麼寫得這麼復雜？因為input是句子啦！
+# 這寫法比上面那個「低效」但更加直觀，沒有使用兩層迴圈
+class Solution:
+    def isPalindrome(self, s):
+        left = 0
+        right = len(s) - 1
+        while left < right:
+            # 首先我要排除兩者至少有一個不是合法字元的情況
+            # 跳過後要重新進行迴圈！
+            if not s[left].isalnum():
+                left += 1
+                continue
+            if not s[right].isalnum():
+                right -= 1
+                continue
+
+            if s[left].lower() == s[right].lower():
+                left += 1
+                right -= 1
+            else:  # XXX 一開始忘記它，結果超時了！
+                return False
+
+        return True
