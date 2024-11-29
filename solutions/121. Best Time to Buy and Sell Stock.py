@@ -1,5 +1,6 @@
 # 暴力法→Time Limit Exceeded
-class Solution1(object):
+# 時間複雜度：O(n^2)
+class Solution1:
     def maxProfit(self, prices):
         """
         :type prices: List[int]
@@ -15,29 +16,9 @@ class Solution1(object):
         return max_profit
 
 
-# 不要用max()，而是用if來更新max_profit
-class Solution2(object):
-    def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
-        max_profit = 0  # 初始化最大利潤
-        for i in range(len(prices)):  # 外層迴圈遍歷每個買入日
-            max_price = prices[i]  # 初始化 max_price 為當前價格
-            # 手動遍歷後續的價格，找出最大賣出價格
-            for j in range(i + 1, len(prices)):
-                if prices[j] > max_price:
-                    max_price = prices[j]
-            # 更新最大利潤，不使用 max 函式
-            potential_profit = max_price - prices[i]
-            if potential_profit > max_profit:
-                max_profit = potential_profit
-        return max_profit
-
-
+# 動態規劃法
 # 單次遍歷法
-class Solution(object):
+class Solution2:
     def maxProfit(self, prices):
         """
         :type prices: List[int]
@@ -62,4 +43,30 @@ class Solution(object):
             # 如果當前價格減去最小價格大於最大利潤，就更新最大利潤
             elif p - min_price > max_profit:
                 max_profit = p - min_price
+        return max_profit
+
+
+# 2024-11-29
+# 本題只要返回最大利潤，所以不必使用enumerate
+class Solution:
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        # FIXME 這是多餘的！刪除也不會影響結果
+        if len(prices) == 1:
+            return 0
+
+        min_price = prices[0]
+        max_profit = 0
+        for p in prices:
+            # 更新最小買入價，這個比較簡單
+            if min_price > p:
+                min_price = p
+
+            # XXX 更新「最大利潤」的條件是本題的寫法重點之一
+            if p - min_price > max_profit:
+                max_profit = p - min_price
+
         return max_profit
