@@ -86,7 +86,7 @@ class Solution:
                 right -= 1
                 continue
 
-            if s[left].lower() == s[right].lower():
+            if s[left].lower() == s[right].lower():  # 題目要求全轉小寫
                 left += 1
                 right -= 1
             else:  # XXX 一開始忘記它，結果超時了！
