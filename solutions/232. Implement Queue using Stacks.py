@@ -7,7 +7,7 @@
 
 # 注意，要使用兩個 stack 來實現 queue 的功能，而不是一個 stack
 # 涉及平攤時間複雜度(Amortized Time Complexity)的概念
-class MyQueue(object):
+class MyQueue:
     def __init__(self):
         """
         Initialize your data structure here.
