@@ -1,11 +1,6 @@
 # 暴力法
-class Solution1(object):
+class Solution1:
     def isAnagram(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
         # 如果兩個字串長度不同，則不可能是 Anagram
         if len(s) != len(t):
             return False
@@ -22,13 +17,9 @@ class Solution1(object):
 
 # 低階一點，使用python的字典 (dict) 來存放每個字母出現的次數
 # 不准用字串的 count 方法
-class Solution2(object):
+# 2024-11-30 迭代一次，使用兩個計數器
+class Solution2:
     def isAnagram(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
         if len(s) != len(t):
             return False
 
@@ -46,13 +37,9 @@ class Solution2(object):
 
 
 # 再低階一點，使用 list 來存放每個字母出現的次數
-class Solution3(object):
+# 2024-11-30 迭代兩次，使用一個計數器
+class Solution3:
     def isAnagram(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
         if len(s) != len(t):
             return False
 
@@ -73,4 +60,32 @@ class Solution3(object):
         return True
 
 
-# 排序法
+# 2024-11-30 先用雜湊計數就好，不搞排序
+# 迭代兩次，只建立一個計數器
+class Solution:
+    def isAnagram(self, s, t):
+        if len(s) != len(t):
+            return False
+
+        # XXX 第一個問題：怎麼同時迴圈兩個字串？
+        # 答案是不必，先迭代其中一個即可
+        # XXX 而且要使用+-相互抵消的方式來做，不要用兩個字典了！
+        count = {}
+        for i in s:
+            # 搞笑的低級錯誤 count.get(i, 0) += 1
+            count[i] = count.get(i, 0) + 1
+
+        for i in t:
+            # 還是需要預設值0，防止兩者並非字母異位詞（anagram）
+            count[i] = count.get(i, 0) - 1
+
+        for v in count.values():
+            if v != 0:
+                return False
+
+        # 更簡單且仍算很好懂的寫法
+        # all、any 我覺得就不要了，常常忘記定義
+        # if sum(count.values()) != 0:
+        #     return False
+
+        return True
