@@ -1,5 +1,5 @@
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
@@ -9,21 +9,15 @@ class TreeNode(object):
 """
 初步思考
 - 既然是二元搜尋樹，那這一定有意義，中序遍歷是有序的升冪序列
-- 結果一定是 p <= result <= q 或 q <= result <= p（因為 q、p 沒有固定誰大誰小）
+- 結果一定是 p <= LCA <= q 或 q <= LCA <= p（因為 q、p 沒有固定誰大誰小）
 - 二元搜尋樹，中序遍歷是有序的，所以我們可以利用這個特性，這是 DFS 的一種，要使用遞迴
 - 根節點與左右子樹的固定關係，可以用來遞迴判斷，結果一定在哪裡——這是重點
 """
 
 
 # 遞迴法
-class Solution(object):
+class Solution1:
     def lowestCommonAncestor(self, root, p, q):
-        """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-        """
         # 如果 p、q 都比 root 小，那麼結果一定在左子樹(而不是當前的 root)
         if p.val < root.val and q.val < root.val:
             return self.lowestCommonAncestor(root.left, p, q)
@@ -41,8 +35,8 @@ class Solution(object):
 """
 方法觀察
 - 不需要比對很深，只要比對到 p、q 一大一小的情況就可以停止，即使 p、q 離 root 很遠
-- 這個命題的最關鍵是：二元搜尋樹的特性，左子樹的「所有節點」都比 root 小，右子樹的所有節點都比 root 大
-- 只要 p、q 一大一小於 root，那麼 root 就是我們要的結果！
+- 這個命題的最關鍵是：二元搜尋樹——左子樹的「所有節點」都比 root 小，右子樹的所有節點都比 root 大
+- XXX 只要 p、q 一大一小於 root，那麼 root 就是我們要的結果！
 - ps 這裡的一大一小，指的都是排除兩者皆大於 root 或皆小於 root 的情況
 """
 
@@ -61,5 +55,21 @@ def lowestCommonAncestor(root, p, q):
             # 向樹的下一層移動，這裡是右子樹
             root = root.right
         # 停止條件，找到答案
+        else:
+            return root
+
+# 2024-12-01
+# 遞迴法，這是錯誤的，保留此錯誤，下次繼續
+class Solution:
+    def lowestCommonAncestor(self, root, p, q):
+        # XXX 設定條件有一個重點，那就是把最複雜的放在else就好
+        # 這裡的最複雜，就是 root 可能介於兩者之間 也可能等同於兩者之一
+        # 條件情況有好幾種 所以放在else
+        # 這裡只要判斷else以外的情況就好
+        # 然後就會簡單很多！
+        if p.val > root.val and q.val > root.val:
+            self.lowestCommonAncestor(root.right)
+        elif p.val < root.val and q.val < root.val:
+            self.lowestCommonAncestor(root.left)
         else:
             return root
