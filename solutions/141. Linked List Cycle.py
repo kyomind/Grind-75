@@ -58,8 +58,8 @@ class Solution:
             if fast and fast.next:
                 fast = fast.next.next
             else:
-                # 快指針先結束，確定沒有循環
-                # XXX 有循環的話，快慢指針都「永遠不會結束」
+                # 快指針遇到none先結束，可確定沒有循環
+                # XXX 因為有循環的話，無論快慢指針都「永遠不會結束」
                 return False
 
             if slow is fast:
