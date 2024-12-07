@@ -7,12 +7,9 @@
 - 判斷式的應用——只能加一次奇數
 """
 
-class Solution(object):
-    def longestPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
+
+class Solution1:
+    def longestPalindrome(self, s: str):
         # 用字典統計每個字母出現的次數
         count = {}
         for c in s:
@@ -32,3 +29,22 @@ class Solution(object):
                 longest_length += 1
 
         return longest_length
+
+
+# 2024-12-07
+class Solution:
+    def longestPalindrome(self, s: str):
+        counts = {}
+        for i in s:
+            counts[i] = counts.get(i, 0) + 1
+
+        longest_count = 0
+        has_odd = False
+        for count in counts.values():
+            if count % 2 == 0:
+                longest_count += count
+            else:
+                longest_count += count - 1
+                has_odd = True
+
+        return longest_count + has_odd  # 利用 bool 也是 int 的特性
