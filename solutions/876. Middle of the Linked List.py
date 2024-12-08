@@ -4,7 +4,7 @@ class ListNode:
         self.val = val
         self.next = next
 
-
+# + 2024-12-08
 class Solution:
     def middleNode(self, head):
         """
@@ -15,9 +15,9 @@ class Solution:
         # 當快指針走到結尾時，慢指針剛好走到中間
         slow = fast = head
 
-        # 依題目限制，節點最少有一個，所以不用檢查 head 是否為 None
+        # XXX 依題目限制，節點最少有一個，所以不用檢查 head 是否為 None
         # 當節點只有一個時，直接回傳頭節點(此時中間節點就是頭節點)
-        # 不會進入迴圈(因為此時 fast.next 會是 None)
+        # 不會進入迴圈(XXX 因為此時 fast.next 會是 None)
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
