@@ -46,7 +46,7 @@ class Solution1:
 
 # 2024-12-03
 # 這次按照文件說的，helper函式回傳兩個值：是否平衡、高度
-# FIXME
+# FIXME 錯誤做法
 class Solution2:
     def isBalanced(self, root):
         # 遞迴、後序遍歷(先處理兩個子樹)
