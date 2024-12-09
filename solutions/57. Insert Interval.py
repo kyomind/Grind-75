@@ -7,9 +7,10 @@
 - 若 interval 在 newInterval 的左側（即 interval[1] < newInterval[0]）
     將 interval 加入 new_intervals，因為已經確保不會有重疊
 - 若 interval 在 newInterval 的右側（即 interval[0] > newInterval[1]）
-    將 newInterval 加入 new_intervals，並將剩餘的區間也全部加入 new_intervals
+    將 newInterval 加入 new_intervals，並將剩餘的區間也全部加入 new_intervals(推薦！)
         因為已經確保不會有重疊
-    但也可以更新 newInterval = interval，這樣下一輪就可以處理 interval，直到迴圈結束(比較沒有效率)
+    但也可以更新 newInterval = interval，這樣下一輪就可以處理 新的 interval 直到迴圈結束
+        但這樣比較沒有效率，而且難想像
 - 若 interval 與 newInterval 有重疊，則更新 newInterval 的範圍，使之包含 interval
 
 三、若遍歷完後 newInterval 尚未加入 new_intervals，將其加入
@@ -18,7 +19,7 @@
 
 # 2024-12-09 這個寫法非常簡潔，連len()都沒用到，但可以通過
 # 這題基本上就要這樣做，不要管其它了
-# XXX 把這解法背(記)下來，比自己慢慢試更有用XD 這裡應該
+# XXX 把這解法背(記)下來，比自己慢慢試更有用XD
 class Solution1:
     def insert(self, intervals, newInterval):
         new_intervals = []
