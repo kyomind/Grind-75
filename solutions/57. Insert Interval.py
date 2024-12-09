@@ -8,7 +8,7 @@
     將 interval 加入 new_intervals，因為已經確保不會有重疊
 - 若 interval 在 newInterval 的右側（即 interval[0] > newInterval[1]）
     將 newInterval 加入 new_intervals，並將剩餘的區間也全部加入 new_intervals
-    因為已經確保不會有重疊
+        因為已經確保不會有重疊
     但也可以更新 newInterval = interval，這樣下一輪就可以處理 interval，直到迴圈結束(比較沒有效率)
 - 若 interval 與 newInterval 有重疊，則更新 newInterval 的範圍，使之包含 interval
 
@@ -16,6 +16,9 @@
 """
 
 
+# 2024-12-09 這個寫法非常簡潔，連len()都沒用到，但可以通過
+# 這題基本上就要這樣做，不要管其它了
+# XXX 把這解法背(記)下來，比自己慢慢試更有用XD 這裡應該
 class Solution1:
     def insert(self, intervals, newInterval):
         new_intervals = []
@@ -25,8 +28,13 @@ class Solution1:
 
             elif i[0] > newInterval[1]:  # 完全在 newInterval 右側
                 new_intervals.append(newInterval)
+                # 2024-12-09 「newInterval = i」這樣寫太抽象了，直接把剩下的加一加會比較直觀
                 # 更新 newInterval 直到迴圈結束
-                newInterval = i
+                # newInterval = i
+
+                # 新寫法，比較直觀
+                new_intervals.extend(intervals[intervals.index(i) :])  # 將剩下的區間加入
+                return new_intervals
 
             else:  # 有重疊，更新 newInterval，但 i 不加入 new_intervals
                 newInterval[0] = min(newInterval[0], i[0])
@@ -42,6 +50,9 @@ class Solution1:
 # 使用 enumerate 可以得到 index，這樣就可以直接切片加入剩餘的區間
 class Solution2:
     def insert(self, intervals, newInterval):
+        # 2024-12-09 其實沒必要檢查這個，即使省略也會正常運作
+        # 邏輯已經包含在迴圈操作中了
+        # 空的話就直接跳過迴圈執行最後兩行，結果相同
         if not intervals:
             return [newInterval]
 
@@ -64,3 +75,22 @@ class Solution2:
         # XXX 這個方法仍然無法省略這兩行，我感覺也不是很好
         new_intervals.append(newInterval)
         return new_intervals
+
+
+# 2024-12-09 未完成，這題模式感很強，下次再寫
+class Solution:
+    def insert(self, intervals, newInterval):
+        # 最優先檢查插入點是否可以在兩邊！省得跑迴圈
+        # 最左邊
+        if newInterval[1] < intervals[0][0]:
+            intervals.insert(0, newInterval)
+            return
+        # 最右邊
+        elif newInterval[0] > intervals[-1][1]:
+            intervals.append(newInterval)
+            return intervals
+
+        new_intervals = []
+        for i in intervals:
+            # 一一比較或合併，同時還要更新 newInterval
+            pass
