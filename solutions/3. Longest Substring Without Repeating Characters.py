@@ -1,7 +1,7 @@
 # 本題是經典的滑動視窗問題
 # 可以用字典或集合來記錄當前子串中的字元
 
-
+# 用字典也有不同的做法，這個做法比較「進階」，也是有比較接近下面集合的字典解法
 class Solution:
     def lengthOfLongestSubstring(self, s):
         """
@@ -9,21 +9,21 @@ class Solution:
         因為字典中的值，即索引，已經巧妙地控制了目前視窗的大小
         """
         # 用來記錄字元上次出現的位置
-        char_index = {}
+        char_last_seen_index = {}
         # 用來記錄當前子串的起始位置
-        start = 0
+        left = 0  # 滑動視窗左邊界
         # 用來記錄最長子串的長度
         max_length = 0
-        for i, char in enumerate(s):
+        for right, char in enumerate(s):
             # 如果字元已經出現過，則更新起始位置
-            if char in char_index:
-                start = max(start, char_index[char] + 1)
+            if char in char_last_seen_index:
+                left = max(left, char_last_seen_index[char] + 1)
 
             # 更新字元的位置
-            char_index[char] = i
+            char_last_seen_index[char] = right
 
             # 更新最長子串的長度
-            max_length = max(max_length, i - start + 1)
+            max_length = max(max_length, right - left + 1)
         return max_length
 
 
@@ -31,7 +31,7 @@ class Solution1:
     def lengthOfLongestSubstring(self, s):
         """
         集合法→更基本的做法
-        只是遇到重複字元時，需要用 while 迴圈來更新起始位置
+        只是遇到重複字元時，需要用 while 迴圈來更新起始位置 left
         """
         # 用來記錄當前子串的字元
         char_set = set()
