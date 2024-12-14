@@ -1,5 +1,5 @@
 # Definition for a binary tree node.
-class TreeNode(object):
+class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
@@ -7,12 +7,8 @@ class TreeNode(object):
 
 
 # 使用 BFS 進行層序遍歷 + queue
-class Solution(object):
+class Solution:
     def levelOrder(self, root):
-        """
-        :type root: Optional[TreeNode]
-        :rtype: List[List[int]]
-        """
         levels = []
         if not root:
             return levels
@@ -46,8 +42,10 @@ class Solution(object):
         return levels
 
 
-# 使用 DFS 進行層序遍歷 + 遞迴
-# FIXME 尚未深入理解
+# 僅供參考 XXX
+# 使用 DFS 進行層序遍歷 + 遞迴(stack)
+# 純參考，但我覺得這個寫法不好理解，不如 BFS 來得直觀
+# 直觀很重要，不要為了簡潔而犧牲可讀性
 class Solution1:
     def levelOrder(self, root: TreeNode) -> list:
         levels = []
