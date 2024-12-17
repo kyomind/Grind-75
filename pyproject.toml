@@ -2,7 +2,7 @@
 requires-python = ">=3.10"
 
 [tool.ruff] # https://docs.astral.sh/ruff/settings/#top-level
-line-length = 100
+line-length = 120
 
 [tool.ruff.lint] # https://docs.astral.sh/ruff/settings/#lint
 ignore = [
