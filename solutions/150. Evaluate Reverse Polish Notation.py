@@ -1,9 +1,5 @@
-class Solution(object):
+class Solution:
     def evalRPN(self, tokens):
-        """
-        :type tokens: List[str]  # 這裡的 tokens 都是字串
-        :rtype: int
-        """
         # 初始化一個空的堆疊，用來儲存操作數和中間結果
         stack = []
 
@@ -24,6 +20,7 @@ class Solution(object):
                     result = a * b
                 elif token == "/":
                     # 整數除法向零截斷，使用 int(a / b) 確保符合題目需求
+                    # 不能用「//」因為它是向負無窮取值，在負數時不符合需求
                     result = int(a / b)
 
                 # 將計算結果壓回堆疊
