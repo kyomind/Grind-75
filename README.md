@@ -3,6 +3,7 @@
 
 - [與 AI 共舞——我的 LeetCode 刷題之道（準備篇）](https://blog.kyomind.tw/grind-leetcode-with-ai-preparation/)
 - [GPTs 介紹：AI 刷題助手與使用方式](https://blog.kyomind.tw/gpts-for-leetcode/)
+- [我的 LeetCode 筆記：記錄刷題的簡單做法](https://blog.kyomind.tw/leetcode-notes-method/)
 
 ## Dashboard
 
