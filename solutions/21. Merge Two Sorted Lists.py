@@ -9,11 +9,6 @@ class ListNode:
 # 2024-11-28 這個方法基本上就是迭代法
 class Solution1:
     def mergeTwoLists(self, list1, list2):
-        """
-        :type list1: Optional[ListNode]
-        :type list2: Optional[ListNode]
-        :rtype: Optional[ListNode]
-        """
         # 本題有一個要重新理解的地方就是雖然叫 list 不過當前總是只有一個節點
         # 所以實際上代表的是節點，而不是真正的 Python list
         # 這是為什麼 while 迴圈中有 list1 = list1.next 這樣的操作
