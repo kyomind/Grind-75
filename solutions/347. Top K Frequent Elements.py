@@ -38,6 +38,7 @@ class Solution:
 
 # 這個寫法可以 beat 92%，但比較不直觀
 # 其中的差距主要還是來自於 Python 的 heapq 實作
+# 主要差異應該就是手動 push/pop 和 heapq.nlargest 的差異
 from collections import defaultdict
 
 
