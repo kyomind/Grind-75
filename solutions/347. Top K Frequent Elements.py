@@ -1,7 +1,7 @@
 import heapq
 
 
-# hash map + min heap 法
+# hash map + min heap 法，效能普通，僅 beat 5%
 class Solution:
     def topKFrequent(self, nums: list[int], k: int) -> list[int]:
         # 先算出每個數字出現的次數
@@ -34,3 +34,20 @@ class Solution:
         # 迴圈結束後，heap 裡面就是前 k 個最大的數字
         # 我們只需要取出第二個元素即可，次數不需要
         return [n for _, n in heap]
+
+
+# 這個寫法可以 beat 90%，但是太過複雜，不建議使用
+# 畢竟其中的差距主要還是來自於 Python 的 heapq 實作
+from collections import defaultdict
+
+
+class Solution1:
+    def topKFrequent(self, nums: list[int], k: int) -> list[int]:
+        # 步驟 1：計算頻率
+        freq_map = defaultdict(int)
+        for n in nums:
+            freq_map[n] += 1
+
+        # 步驟 2：直接使用 heapq.nlargest，避免手動 push/pop
+        # 不過這一步的寫法還是值得參考的 XXX
+        return [num for num, _ in heapq.nlargest(k, freq_map.items(), key=lambda x: x[1])]
