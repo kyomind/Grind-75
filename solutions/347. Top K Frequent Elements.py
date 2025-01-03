@@ -36,8 +36,8 @@ class Solution:
         return [n for _, n in heap]
 
 
-# 這個寫法可以 beat 90%，但是太過複雜，不建議使用
-# 畢竟其中的差距主要還是來自於 Python 的 heapq 實作
+# 這個寫法可以 beat 92%，但比較不直觀
+# 其中的差距主要還是來自於 Python 的 heapq 實作
 from collections import defaultdict
 
 
