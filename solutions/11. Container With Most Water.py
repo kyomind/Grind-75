@@ -26,16 +26,16 @@ class Solution1:
 
 
 # 有註解的版本
-class Solution:
+class Solution2:
     def maxArea(self, height: list[int]) -> int:
-        # 初始化兩個指針，分別指向陣列的兩端
+        # 初始化兩個指針，分別指向陣列的兩端(的索引值)
         left, right = 0, len(height) - 1
         # 初始化最大面積為 0
         max_area = 0
 
-        # 開始雙指針迴圈，直到兩指針相遇
+        # 開始雙指針迴圈，直到兩指針相遇就立刻結束
         while left < right:
-            # 計算當前容器的面積
+            # 計算當前容器的面積: 最小高度 * 寬度
             current_area = min(height[left], height[right]) * (right - left)
             # 更新最大面積
             max_area = max(max_area, current_area)
@@ -49,4 +49,25 @@ class Solution:
                 right -= 1
 
         # 返回最終的最大面積
+        return max_area
+
+
+# 2025-02-01 練習
+class Solution:
+    def maxArea(self, height: list[int]) -> int:
+        left = 0
+        right = len(height) - 1
+        max_area = 0
+
+        while left < right:
+            # 計算面積
+            area = min(height[left], height[right]) * (right - left)  # 忘記加上括號，計算順序錯誤
+            max_area = max(area, max_area)
+
+            # 移動指針
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+
         return max_area
