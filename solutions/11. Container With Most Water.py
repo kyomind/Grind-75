@@ -57,7 +57,7 @@ class Solution:
     def maxArea(self, height: list[int]) -> int:
         left = 0
         right = len(height) - 1
-        max_area = 0
+        max_area = 0  # 注意，初始化是在迴圈外面，也就是這個地方
 
         while left < right:
             # 計算面積
