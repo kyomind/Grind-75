@@ -1,4 +1,5 @@
 # by ChatGPT + 部分我的註解，第一次先看懂所有的寫法與思路，並透過註解筆記
+# 這個比克勞德版的更加直觀、好理解
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         def expand_around_center(left: int, right: int) -> str:
@@ -10,10 +11,11 @@ class Solution:
             - XXX Python 會在外部函式尋找變數，這屬於「閉包」的一部分，函式內部可以訪問外部範疇的變數
             - 程式碼簡潔：少傳遞一個參數，程式碼看起來更簡潔
             """
-            # 向外擴展直到邊界超出或字元不相等
+            # 向外擴展直到「邊界超出」或「字元不相等」
             # XXX 注意，左指針是 >=0，但右指針是 < len(s)，因為 len(s)本身已經超過index range
+            # 注意，這個時候index是在中間，要向「兩邊」擴散，和一般的左右指針移動方向「相反」！
             while left >= 0 and right < len(s) and s[left] == s[right]:
-                left -= 1
+                left -= 1  # 繼續向左移動(擴散)——直到超過邊界，即小於0
                 right += 1
 
             # XXX 當擴展停止(離開迴圈)時，left 和 right 的位置已經「超出了有效回文範圍」
