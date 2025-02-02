@@ -2,10 +2,6 @@
 # 時間複雜度：O(n^2)
 class Solution1:
     def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
         max_profit = 0
         for i, p in enumerate(prices):
             # 每一個價格都和後面的價格比較，找出「當次」最大的差值
@@ -16,45 +12,12 @@ class Solution1:
         return max_profit
 
 
-# 動態規劃法
-# 單次遍歷法
-class Solution2:
-    def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
-        min_price = 0
-        max_profit = 0
-        for i, p in enumerate(prices):
-            # 初始化最小價格為第一天的價格
-            if i == 0:
-                min_price = p
-                continue
-
-            """以下兩件事情不會同時發生：(所以用 if/else 或 if/elif 都可以，只是後者更直觀)
-            - 如果當前價格是新的最小價格，則更新 min_price。
-            - 如果當前價格減去最小價格的利潤比目前的最大利潤還大，則更新 max_profit。
-            注意：當 min_price 被更新時，當前 p 無法帶來利潤，因此 max_profit 不會更新。"""
-
-            # 如果當前價格比最小價格還小，就更新最小價格
-            if p < min_price:
-                min_price = p
-            # 如果當前價格減去最小價格大於最大利潤，就更新最大利潤
-            elif p - min_price > max_profit:
-                max_profit = p - min_price
-        return max_profit
-
-
 # 2024-11-29
 # 本題只要返回最大利潤，所以不必使用enumerate
-class Solution:
-    def maxProfit(self, prices):
-        """
-        :type prices: List[int]
-        :rtype: int
-        """
-        # FIXME 這是多餘的！刪除也不會影響結果
+class Solution2:
+    def maxProfit(self, prices: list[int]) -> int:
+        # FIXME 這個邊界檢查是多餘的！刪除也不會影響結果
+        # 因為 max_profit 預設就是 0，只有一個值時，就會 return 0
         if len(prices) == 1:
             return 0
 
@@ -66,7 +29,26 @@ class Solution:
                 min_price = p
 
             # XXX 更新「最大利潤」的條件是本題的寫法重點之一
+            # 2025-02-02 多一個變數會好讀很多，參考下面寫法
             if p - min_price > max_profit:
                 max_profit = p - min_price
+
+        return max_profit
+
+
+# 2025-02-02
+# 簡潔、樸素，但可讀性高，推薦此寫法
+class Solution:
+    def maxProfit(self, prices: list[int]) -> int:
+        max_profit = 0
+        min_price = prices[0]
+
+        for p in prices:
+            if p < min_price:
+                min_price = p
+
+            profit = p - min_price
+            if profit > max_profit:
+                max_profit = profit
 
         return max_profit
