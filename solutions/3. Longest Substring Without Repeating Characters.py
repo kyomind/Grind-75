@@ -59,7 +59,7 @@ class Solution11:
                 left += 1
 
             char_set.add(char)  # 又加回來了，但這次是因為最新的字元
-            max_length = max(max_length, right - left + 1)
+            max_length = max(max_length, right - left + 1)  # 注意這個+1，因為是兩邊都要包括
         return max_length
 
 
