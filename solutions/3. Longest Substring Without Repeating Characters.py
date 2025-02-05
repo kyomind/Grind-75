@@ -63,8 +63,8 @@ class Solution11:
         return max_length
 
 
-# 2025-02-02
-# 不要用 enumerate
+# 2025-02-05 重要！
+# XXX 不要用 enumerate
 class Solution:
     def lengthOfLongestSubstring(self, s: str):
         char_set = set()
