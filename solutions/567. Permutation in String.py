@@ -72,6 +72,7 @@ class Solution:
                 char_left = s2[left]
                 if window_count[char_left] == 1:
                     # 字元頻率為 1 時，移除字典中的 key
+                    # XXX 這是比較容易忘記的地方
                     del window_count[char_left]
                 else:
                     # 字元頻率大於 1 時，減少頻率
