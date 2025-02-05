@@ -66,4 +66,24 @@ class Solution11:
 # 2025-02-02
 # 不要用 enumerate
 class Solution:
-    def lengthOfLongestSubstring(self, s: str): ...
+    def lengthOfLongestSubstring(self, s: str):
+        char_set = set()
+        left = 0
+        right = 0
+        max_length = 0
+        for char in s:
+            while char in char_set:
+                # XXX 錯誤且重要：char_set.remove(char)
+                # 難怪我想說，怎麼沒有「從左邊開始移除字元的感覺？」果然是寫錯了！
+                char_set.remove(s[left])
+                left += 1
+
+            char_set.add(char)
+            max_length = max(max_length, right - left + 1)
+            right += 1  # XXX 錯誤：本來這行寫在上一行之前，就錯了
+            # 因為要本次 for 的邏輯全算完，最後才能移動 right 指針
+            # right +1，是下一次的迴圈的狀態，不是本次
+            # 這個如果用 enumerate，就你不可能會發生這個情況，因為會是在下一次起始時才會+完1
+            # 太習慣 enumerate 可能不是好事
+
+        return max_length
