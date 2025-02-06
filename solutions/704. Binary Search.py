@@ -2,11 +2,6 @@
 # You must write an algorithm with O(log n) runtime complexity.
 class Solution1:
     def search(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
         # 不可遍歷，只能透過 index 來找到 target
         left = 0
         right = len(nums) - 1
@@ -34,7 +29,7 @@ class Solution1:
 
 # 2024-12-01
 # 使用雙閉區間、while 迴圈
-class Solution:
+class Solution2:
     def search(self, nums, target):
         right = len(nums) - 1
         left = 0
@@ -47,4 +42,28 @@ class Solution:
             # XXX 不能直接else，因為目標可能「不存在」
             elif nums[mid] == target:
                 return mid
+        return -1
+
+
+# 2025-02-06 一樣，while、雙閉
+# 手寫錯誤超多，還是不少細節
+class Solution3:
+    def search(self, nums, target):
+        left = 0
+        right = len(nums) - 1
+        # mid = (left + right) // 2  XXX 位置錯誤，如此一來mid不會變動，因為下面內容完全沒有重設值的地方
+        while right >= left:
+            mid = (left + right) // 2
+
+            # if mid == target:  XXX 不是比較index啦
+            if nums[mid] == target:
+                return mid
+
+            elif nums[mid] > target:
+                # mid = right - 1   XXX 這裡很明顯寫錯了，範圍只縮小一點點，而不是減半
+                # XXX mid 已經檢查過，不是target，因為是閉區間所以要right不能直接換成mid，而是要-1
+                right = mid - 1
+            elif nums[mid] < target:
+                # mid = left + 1   XXX same
+                left = mid + 1
         return -1
