@@ -33,7 +33,7 @@ class Solution:
     def reverseList(self, head):
         prev = None
         current = head
-        next_ = None
+        # next_ = None 本行可省略 XXX
         # while head 也不是不行，因為後不會再用到了
         # 只是操作過程中，head 這變數名稱具有誤導性
         while current:
