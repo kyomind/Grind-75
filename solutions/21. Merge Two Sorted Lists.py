@@ -45,11 +45,6 @@ class Solution1:
 # 自行實作迭代法
 class Solution:
     def mergeTwoLists(self, list1, list2):
-        """
-        :type list1: Optional[ListNode]
-        :type list2: Optional[ListNode]
-        :rtype: Optional[ListNode]
-        """
         # 先初始化答案容器，注意他可不是真正的list
         dummy = ListNode()
         list3 = (
