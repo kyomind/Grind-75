@@ -29,7 +29,7 @@ class Solution3:
 
 
 # 2024-12-07
-class Solution:
+class Solution2:
     def reverseList(self, head):
         prev = None
         current = head
@@ -44,3 +44,18 @@ class Solution:
             current = next_
 
         return prev
+
+
+# 2025-02-11
+class Solution:
+    def reverseList(self, head):
+        new_list = None
+        current = head
+        while current:
+            # XXX 這裡有一個明顯的規則是，上一行的每一個右側都會變成下一行的左側！被重新賦值
+            next_temp = current.next  # 暫存下一個，因為下一個要反轉了(更新)
+            current.next = new_list  # 反轉
+            new_list = current
+            current = next_temp
+
+        return new_list
