@@ -43,7 +43,7 @@ class Solution1:
 
 # 2024-11-28
 # 自行實作迭代法
-class Solution:
+class Solution2:
     def mergeTwoLists(self, list1, list2):
         # 先初始化答案容器，注意他可不是真正的list
         dummy = ListNode()
@@ -74,4 +74,30 @@ class Solution:
             list3.next = list2
 
         # 去掉頭節點(虛擬)
+        return dummy.next
+
+# 2025-02-11
+class Solution:
+    def mergeTwoLists(self, list1, list2):
+        """難點在於：怎麼樣取得新list的頭節點！
+        好吧，其實並沒有
+        """
+        dummy= ListNode()
+        current = dummy
+        while list1 and list2:
+            if list1.val <= list2.val:
+                current.next = list1 # XXX 注意是節點本身，而不是值
+                list1 = list1.next
+            else:
+                current.next=list2
+                list2=list2.next
+            # XXX 少了最關鍵的一行，那新list永遠只會有一個元素而已★★★
+            current = current.next # XXX 從本行重新賦值開始，dummy 就和 current 的參考脫離了
+            # XXX 所以 dummy 仍然是頭節點，指向真正的開端
+
+        if list1:
+            current.next=list1
+        else:
+            current.next=list2
+
         return dummy.next
