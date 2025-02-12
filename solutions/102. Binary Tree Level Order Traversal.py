@@ -91,10 +91,12 @@ class Solution:
         while queue:
             level_vals = []
             level_length = len(queue)
+            # for i in queue:
             # XXX 我知道為不能直接for這個queue了，因為中間要"修改"它，所以不能同時操作
             # 但用index就可以，相當於queue的「替身」
             # 因此「長度」是必要的，這是替身們的分界
-            # for i in queue:
+
+            # 也可以直接寫成 `for _ in range(len(queue)):`，省略變數level_length
             for _ in range(level_length):
                 # node = queue[-1] XXX 要pop才行，不然queue永遠不會減少只會增加
                 node = queue.pop(0)
