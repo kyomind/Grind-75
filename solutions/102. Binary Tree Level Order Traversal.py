@@ -45,7 +45,7 @@ class Solution2:
 
 
 # 2024-12-14
-class Solution:
+class Solution3:
     def levelOrder(self, root):
         # 空節點
         if root is None:
@@ -81,26 +81,30 @@ class Solution:
         return levels
 
 
-# 僅供參考 XXX
-# 使用 DFS 進行層序遍歷 + 遞迴(stack)
-# 純參考，但我覺得這個寫法不好理解，不如 BFS 來得直觀
-# 直觀很重要，不要為了簡潔而犧牲可讀性
-class Solution1:
-    def levelOrder(self, root: TreeNode) -> list:
+class Solution:
+    def levelOrder(self, root):
+        if root is None:
+            return []
+
         levels = []
-        if not root:
-            return levels
+        queue = [root]
+        while queue:
+            level_vals = []
+            level_length = len(queue)
+            # XXX 我知道為不能直接for這個queue了，因為中間要"修改"它，所以不能同時操作
+            # 但用index就可以，相當於queue的「替身」
+            # 因此「長度」是必要的，這是替身們的分界
+            # for i in queue:
+            for _ in range(level_length):
+                # node = queue[-1] XXX 要pop才行，不然queue永遠不會減少只會增加
+                node = queue.pop(0)
+                level_vals.append(node.val)
 
-        def traverse_tree_by_level(node, level):
-            if len(levels) == level:
-                levels.append([])
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
 
-            levels[level].append(node.val)
+            levels.append(level_vals)
 
-            if node.left:
-                traverse_tree_by_level(node.left, level + 1)
-            if node.right:
-                traverse_tree_by_level(node.right, level + 1)
-
-        traverse_tree_by_level(root, 0)
         return levels
