@@ -8,10 +8,6 @@ class ListNode:
 # 雙指針法
 class Solution1:
     def hasCycle(self, head):
-        """
-        :type head: ListNode
-        :rtype: bool
-        """
         # 雙指針法: 快慢指針
         # 起點相同，快指針走兩步，慢指針走一步
         fast = slow = head
@@ -41,12 +37,9 @@ class Solution1:
         return False
 
 
-# hash table
-
-
 # 2024-12-04
 # 先用雙指針
-class Solution:
+class Solution2:
     def hasCycle(self, head):
         if head is None:
             return False
@@ -65,3 +58,29 @@ class Solution:
             if slow is fast:
                 # 只有一種情況為true，即兩個指針相遇
                 return True
+
+
+# 2025-02-12
+class Solution:
+    def hasCycle(self, head):
+        if head is None:
+            return False
+
+        fast = slow = head
+        # while fast and fast.next: XXX 亂寫一通，完全沒有移動指針
+        # if fast.val == slow.val:
+        #     return True
+
+        while slow:
+            if fast and fast.next:
+                fast = fast.next.next
+            else:
+                return False
+
+            slow = slow.next
+
+            # if slow.val == fast.val: XXX 請使用 is ！因為題目沒說值不會重複
+            if slow is fast:
+                return True
+
+        return False
