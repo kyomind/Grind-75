@@ -55,6 +55,7 @@ class Solution:
 
             # 判斷mid左右的哪一邊是有序的
             # XXX 注意，必須使用"<="才能正確判斷，只有"<"會出現錯誤！
+            # 另一種 if 是 if nums[mid] > nums[right]:，也就是目前的 else
             if nums[left] <= nums[mid]:  # left邊有序，可以繼續處理
                 # 判斷 target 在不在這個left邊範圍內，用邊界比較即可
                 if nums[left] <= target < nums[mid]:  # yes，這是最佳結果，有序+yes
