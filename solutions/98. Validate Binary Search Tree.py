@@ -1,5 +1,4 @@
 # Definition for a binary tree node.
-from typing import Optional
 
 
 class TreeNode:
@@ -9,8 +8,8 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+class Solution1:
+    def isValidBST(self, root: TreeNode | None) -> bool:
         self.prev = float("-inf")
 
         def is_valid_in_order(node):
@@ -33,3 +32,38 @@ class Solution:
 
         # 開始中序遍歷
         return is_valid_in_order(root)
+
+
+# 2025-02-13 先用上面寫法，之前再考慮用範例寫法
+class Solution:
+    def isValidBST(self, root: TreeNode | None) -> bool:
+        self.prev = float("-inf")
+
+        def validate(node):
+            """注意：所有的判斷、檢查基本上都要return
+            而且遞迴函式都要return
+            """
+            if not node:
+                return True
+
+            # 嚴格用中序遍歷順序：左子樹、當前節點、右子樹
+
+            # 左子樹
+            # if validate(node.left): 錯誤寫法，因為true要繼續，所以應該要驗false
+            if not validate(node.left):
+                return False
+            # 當前節點
+            if not node.val > self.prev:
+                return False
+
+            self.prev = node.val
+
+            # 右子樹
+            # if not validate() ... 錯誤，要 return
+            # 相當於以下寫法，但顯然這樣寫更簡潔而已
+            # if not validate(node.right):
+            #    return False
+            # return True ——全部都檢查了都正確時
+            return validate(node.right)
+
+        return validate(root)
