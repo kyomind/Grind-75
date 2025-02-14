@@ -1,40 +1,6 @@
-# 暴力法，但不可行，因為無法處理 "([)]" 這種情況
-class Solution1:
-    def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        char_map = {")": 0, "]": 0, "}": 0, "(": 0, "[": 0, "{": 0}
-        for c in s:
-            if c == "(":
-                char_map["("] += 1
-            elif c == ")":
-                char_map[")"] += 1
-            elif c == "[":
-                char_map["["] += 1
-            elif c == "]":
-                char_map["]"] += 1
-            elif c == "{":
-                char_map["{"] += 1
-            elif c == "}":
-                char_map["}"] += 1
-        if (
-            char_map["("] != char_map[")"]
-            or char_map["["] != char_map["]"]
-            or char_map["{"] != char_map["}"]
-        ):
-            return False
-        return True
-
-
 # 使用 stack
 class Solution2:
     def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
         stack = []
         for c in s:
             if c in ["(", "[", "{"]:
@@ -61,10 +27,6 @@ class Solution2:
 # 2024-11-27
 class Solution22:
     def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
         stack = []
         for i in s:
             if i in ["{", "(", "["]:
@@ -72,7 +34,7 @@ class Solution22:
             # 這裡可以確定，當前的 i 是結束符號，要從stack拉出一個對應的
             # 而且要剛好對應——大對大、中對中、小對小，不可以對錯
             else:
-                if not stack: # XXX 太容易忘記檢查
+                if not stack:  # XXX 太容易忘記檢查
                     return False
                 # 寫法不優雅，就是線性思考而已
                 if i == "}" and stack.pop() == "{":
@@ -89,13 +51,13 @@ class Solution22:
         return True
 
 
-class Solution:
+class Solution3:
     def isValid(self, s):
         # XXX pairs ={'{':'}','(':')','[':']'}
         # 必須是 key 為下括號，因為key→value非常直接，從value到key很麻煩
         # 而pairs[i]我需要得到的是上括號！故設為value
         pairs = {"}": "{", ")": "(", "]": "["}
-        stack =[]
+        stack = []
         for i in s:
             if i in pairs.values():
                 stack.append(i)
@@ -108,8 +70,32 @@ class Solution:
                 if not stack or stack.pop() != pairs[i]:
                     return False
 
-        return len(stack)==0
+        return len(stack) == 0
+
 
 """
 else 和 if 可以進一步整合為 elif 就好了，else 顯得有點多餘
 """
+
+
+class Solution:
+    def isValid(self, s):
+        stack = []
+        # 要迅速依照右括號來得到左括號，所以左括號是值
+        # XXX 因為左括號必定是先遇到，已經存起來的內容，所以能夠從字典中尋找！
+        mapping = {")": "(", "}": "{", "]": "["}
+        for i in s:
+            # 遇到右括號要push進stack
+            if i in mapping.values():
+                stack.append(i)
+            # i是左括號：)、]、}
+            else:
+                # 這裡有一個邊界條件是stack如果是空，則不能pop，而且已經不符合條件
+                # 要優先檢查以免出錯
+                if not stack:
+                    return False
+                # if not mapping[i] == stack.pop(): XXX 誰教這種寫法！
+                if mapping[i] != stack.pop():
+                    return False
+        # for結束時，stack也必須清空才行
+        return stack == []
