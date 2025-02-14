@@ -18,7 +18,7 @@ class Solution1:
         right = self.maxDepth(root.right)
 
         # 這個是關鍵，最後回傳並增加高度
-        return max(left, right) + 1
+        return max(left, right) + 1 # 當前節點的高度
 
 
 class Solution:
